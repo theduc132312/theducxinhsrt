@@ -26,8 +26,10 @@ jobs:
 
       - name: Build executable
         run: |
-          pyinstaller --onefile main.py
-        shell: bash
+          pyinstaller main.py --onefile --noconfirm ^
+            --hidden-import=PySimpleGUI ^
+            --collect-all PySimpleGUI
+        shell: cmd
 
       - name: Upload artifact
         uses: actions/upload-artifact@v4
