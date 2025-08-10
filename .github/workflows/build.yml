@@ -26,16 +26,14 @@ jobs:
 
       - name: Build executable
         run: |
-          pyinstaller main.py --onefile --noconfirm ^
+          pyinstaller main.py --onedir --noconfirm ^
             --name theducxinhSRT ^
             --hidden-import=PySimpleGUI ^
-            --hidden-import=google.generativeai ^
-            --collect-all PySimpleGUI ^
-            --collect-all google.generativeai
+            --collect-all PySimpleGUI
         shell: cmd
 
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
           name: theducxinhSRT-exe
-          path: dist/theducxinhSRT.exe
+          path: dist/theducxinhSRT/
