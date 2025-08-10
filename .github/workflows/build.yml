@@ -36,8 +36,18 @@ jobs:
             --hidden-import google.generativeai
         shell: cmd
 
-      - name: Upload artifact
+      - name: Zip build folder
+        run: |
+          powershell Compress-Archive -Path dist/theducxinhSRT/* -DestinationPath theducxinhSRT.zip
+
+      - name: Upload folder artifact
         uses: actions/upload-artifact@v4
         with:
-          name: theducxinhSRT-exe
+          name: theducxinhSRT-exe-folder
           path: dist/theducxinhSRT/
+
+      - name: Upload zip artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: theducxinhSRT-exe-zip
+          path: theducxinhSRT.zip
