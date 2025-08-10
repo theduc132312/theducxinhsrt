@@ -26,19 +26,24 @@ jobs:
 
       - name: Build executable
         run: |
-          pyinstaller main.py --onedir --noconfirm ^
+          pyinstaller main.py --onefile --noconfirm ^
             --name theducxinhSRT ^
-            --collect-all PySimpleGUI ^
-            --collect-all google ^
-            --collect-all google.generativeai ^
             --hidden-import PySimpleGUI ^
             --hidden-import google.generativeai ^
-            --additional-hooks-dir=hooks
+            --hidden-import google ^
+            --collect-all PySimpleGUI ^
+            --collect-all google ^
+            --collect-all google.generativeai
+        shell: cmd
+
+      - name: Test executable
+        run: |
+          echo Testing EXE...
+          dist\theducxinhSRT.exe || exit 1
         shell: cmd
 
       - name: Zip build folder
-        run: |
-          powershell Compress-Archive -Path dist/theducxinhSRT/* -DestinationPath theducxinhSRT.zip
+        run: powershell Compress-Archive -Path dist\theducxinhSRT.exe -DestinationPath theducxinhSRT.zip
 
       - name: Upload zip
         uses: actions/upload-artifact@v4
