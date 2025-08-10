@@ -1,43 +1,53 @@
-name: build-windows
+name: Build BOSS-SRT exe (Windows)
 
 on:
   push:
     branches:
       - main
-  pull_request:
 
 jobs:
   build-windows:
     runs-on: windows-latest
 
     steps:
-    - name: Checkout source code
-      uses: actions/checkout@v4
+      - name: Checkout source code
+        uses: actions/checkout@v4
 
-    - name: Set up Python
-      uses: actions/setup-python@v5
-      with:
-        python-version: "3.10"
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
 
-    - name: Install dependencies
-      run: |
-        python -m pip install --upgrade pip
-        pip install -r requirements.txt
-        pip install pyinstaller
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+          pip install pyinstaller
 
-    - name: Build executable
-      run: pyinstaller --onefile main.py
+      - name: Build executable
+        run: |
+          pyinstaller main.py ^
+            --name "BOSS-SRT" ^
+            --onedir ^
+            --noconfirm ^
+            --collect-all PySimpleGUI ^
+            --hidden-import PySimpleGUI ^
+            --hidden-import google ^
+            --hidden-import google.generativeai
+        shell: cmd
 
-    - name: Test executable
-      run: |
-        echo Running the built EXE...
-        dist\main.exe || exit 1
+      - name: Test executable
+        run: |
+          echo Running the built EXE...
+          ./dist/"BOSS-SRT"/"BOSS-SRT".exe
+        shell: cmd
 
-    - name: Zip build folder
-      run: powershell Compress-Archive -Path dist\* -DestinationPath build.zip
+      - name: Zip build folder
+        run: |
+          powershell Compress-Archive -Path dist/"BOSS-SRT"/* -DestinationPath BOSS-SRT.zip
 
-    - name: Upload zip
-      uses: actions/upload-artifact@v4
-      with:
-        name: windows-build
-        path: build.zip
+      - name: Upload zip
+        uses: actions/upload-artifact@v4
+        with:
+          name: BOSS-SRT-zip
+          path: BOSS-SRT.zip
