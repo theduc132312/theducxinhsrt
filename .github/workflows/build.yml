@@ -32,7 +32,6 @@ jobs:
             --collect-all google ^
             --collect-all google.generativeai ^
             --hidden-import PySimpleGUI ^
-            --hidden-import google ^
             --hidden-import google.generativeai
         shell: cmd
 
@@ -40,14 +39,8 @@ jobs:
         run: |
           powershell Compress-Archive -Path dist/theducxinhSRT/* -DestinationPath theducxinhSRT.zip
 
-      - name: Upload folder artifact
+      - name: Upload zip
         uses: actions/upload-artifact@v4
         with:
-          name: theducxinhSRT-exe-folder
-          path: dist/theducxinhSRT/
-
-      - name: Upload zip artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: theducxinhSRT-exe-zip
+          name: theducxinhSRT-zip
           path: theducxinhSRT.zip
