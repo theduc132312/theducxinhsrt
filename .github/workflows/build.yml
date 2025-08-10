@@ -28,8 +28,9 @@ jobs:
         run: |
           pyinstaller main.py --onedir --noconfirm ^
             --name theducxinhSRT ^
-            --hidden-import=PySimpleGUI ^
-            --collect-all PySimpleGUI
+            --collect-all PySimpleGUI ^
+            --collect-all google ^
+            --collect-all google.generativeai
         shell: cmd
 
       - name: Upload artifact
