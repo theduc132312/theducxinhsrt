@@ -29,11 +29,9 @@ jobs:
           pyinstaller main.py --onefile --noconfirm ^
             --name theducxinhSRT ^
             --hidden-import=PySimpleGUI ^
-            --collect-all PySimpleGUI
-        shell: cmd
-
-      - name: Check dist folder
-        run: dir dist
+            --hidden-import=google.generativeai ^
+            --collect-all PySimpleGUI ^
+            --collect-all google.generativeai
         shell: cmd
 
       - name: Upload artifact
