@@ -18,11 +18,16 @@ Desktop SRT Translator (build to `.exe` via GitHub Actions)
 1. Tạo repo trống trên GitHub (ví dụ `yourname/theducxinhsrt`).
 2. Clone repo về local, copy toàn bộ file trong thư mục này vào repo local.
 3. Commit & push lên `main` (hoặc `master`) branch.
-4. Vào tab **Actions** trên trang repo GitHub - workflow `Build theducxinhsrt exe (Windows)` sẽ chạy. Nếu không tự chạy, vào workflow và click **Run workflow**.
-5. Khi workflow hoàn tất, mở run -> **Artifacts** -> download artifact `theducxinhsrt-exe`. Bên trong có file `theducxinhsrt.exe`.
+4. Vào tab **Actions** trên trang repo GitHub - workflow `Build theducxinhsrt exe (Windows)` sẽ chạy.  
+   - Nếu không tự chạy, vào workflow và click **Run workflow**.
+5. Khi workflow hoàn tất, mở run → **Artifacts** → download artifact `theducxinhsrt-exe`.  
+   - Giải nén, bên trong có file `theducxinhsrt.exe`.
 6. Tải file `.exe` về máy Windows, chạy:
    - Lần đầu app sẽ yêu cầu **API Key (Gemini)** — nhập API key của bạn rồi bấm Save Key.
    - Chọn file `.srt`, chọn ngôn ngữ, chọn chế độ dịch, bấm Translate. Khi xong bấm Export để lưu file dịch.
+
+💡 **Lưu ý:** Nếu workflow báo lỗi (exit code 1), click vào run → **build-windows** → xem log chi tiết để tìm nguyên nhân.  
+Nguyên nhân phổ biến: thiếu dependency, lệnh build sai, hoặc môi trường GitHub Actions thay đổi.
 
 ## Lưu ý
 - **Không** lưu API key vào repo; app lưu key cục bộ ở `~/.theducxinhsrt_config.json` khi bạn bấm Save Key.
