@@ -30,7 +30,10 @@ jobs:
             --name theducxinhSRT ^
             --collect-all PySimpleGUI ^
             --collect-all google ^
-            --collect-all google.generativeai
+            --collect-all google.generativeai ^
+            --hidden-import PySimpleGUI ^
+            --hidden-import google ^
+            --hidden-import google.generativeai
         shell: cmd
 
       - name: Upload artifact
