@@ -27,6 +27,7 @@ jobs:
       - name: Build executable
         run: |
           pyinstaller main.py --onefile --noconfirm ^
+            --name theducxinhSRT ^
             --hidden-import=PySimpleGUI ^
             --collect-all PySimpleGUI
         shell: cmd
