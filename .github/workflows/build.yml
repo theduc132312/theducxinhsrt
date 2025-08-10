@@ -32,7 +32,8 @@ jobs:
             --collect-all google ^
             --collect-all google.generativeai ^
             --hidden-import PySimpleGUI ^
-            --hidden-import google.generativeai
+            --hidden-import google.generativeai ^
+            --additional-hooks-dir=hooks
         shell: cmd
 
       - name: Zip build folder
