@@ -57,7 +57,8 @@ def main():
             # Giả lập dịch (demo)
             with open(file_path, "r", encoding="utf-8") as f:
                 content = f.read()
-            translated_data = f"[DỊCH {lang} - {mode}]\n" + content
+            translated_data = f"[DỊCH {lang} - {mode}]
+" + content
             sg.popup("Dịch thành công! Bấm Export để lưu.")
         elif event == "Export":
             if not translated_data:
